@@ -1,25 +1,12 @@
-import { useState } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
-function Home() {
-  const [apiResponse, setApiResponse] = useState(null);
-  const [users, setUsers] = useState(null);
 
-  const githubURL = async () => {
-    try {
-      window.open('https://github.com/AdrianMorack', '_blank');
-    } catch (error) {
-      console.error('Error:', error);
-      setUsers({ error: 'Failed to change URL' });
-    }
+function Home() {
+  const githubURL = () => {
+    window.open('https://github.com/AdrianMorack', '_blank');
   };
 
-  const linkedinURL = async () => {
-    try {
-      window.open('https://www.linkedin.com/in/adrian-morack-10501a1a9/', '_blank');
-    } catch (error) {
-      console.error('Error:', error);
-      setUsers({ error: 'Failed to change URL' });
-    }
+  const linkedinURL = () => {
+    window.open('https://www.linkedin.com/in/adrian-morack-10501a1a9/', '_blank');
   };
 
 
