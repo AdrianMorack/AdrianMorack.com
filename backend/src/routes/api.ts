@@ -2,11 +2,6 @@ import { Router, Request, Response } from 'express';
 
 const router = Router();
 
-// Example API routes
-router.get('/test', (req: Request, res: Response) => {
-  res.json({ message: 'API endpoint working!', timestamp: new Date() });
-});
-
 router.get('/users', (req: Request, res: Response) => {
   // Mock user data - replace with database calls later
   res.json([

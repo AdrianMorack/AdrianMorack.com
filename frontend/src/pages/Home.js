@@ -4,25 +4,12 @@ function Home() {
   const [apiResponse, setApiResponse] = useState(null);
   const [users, setUsers] = useState(null);
 
-  const testAPI = async () => {
+  const githubURL = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/test');
-      const data = await response.json();
-      setApiResponse(data);
+      window.open('https://github.com/AdrianMorack', '_blank');
     } catch (error) {
       console.error('Error:', error);
-      setApiResponse({ error: 'Failed to connect to API' });
-    }
-  };
-
-  const getUsers = async () => {
-    try {
-      const response = await fetch('http://localhost:3001/api/users');
-      const data = await response.json();
-      setUsers(data);
-    } catch (error) {
-      console.error('Error:', error);
-      setUsers({ error: 'Failed to fetch users' });
+      setUsers({ error: 'Failed to change URL' });
     }
   };
 
@@ -32,16 +19,7 @@ function Home() {
       <p>This is your React frontend connected to your Express backend!</p>
       
       <div style={{ marginTop: '20px' }}>
-        <button onClick={testAPI} style={{
-          padding: '10px 20px',
-          fontSize: '16px',
-          cursor: 'pointer',
-          marginRight: '10px'
-        }}>
-          Test Backend API
-        </button>
-
-        <button onClick={getUsers} style={{
+        <button onClick={githubURL} style={{
           padding: '10px 20px',
           fontSize: '16px',
           cursor: 'pointer'
