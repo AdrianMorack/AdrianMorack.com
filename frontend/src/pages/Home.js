@@ -13,6 +13,16 @@ function Home() {
     }
   };
 
+  const linkedinURL = async () => {
+    try {
+      window.open('https://www.linkedin.com/in/adrian-morack-10501a1a9/', '_blank');
+    } catch (error) {
+      console.error('Error:', error);
+      setUsers({ error: 'Failed to change URL' });
+    }
+  };
+
+
   return (
     <div>
       <h1>Welcome to Adrian Morack's Website</h1>
@@ -22,7 +32,7 @@ function Home() {
         <button onClick={githubURL}>
           <FaGithub size={30}/>
         </button>
-        <button onClick={githubURL}>
+        <button onClick={linkedinURL}>
           <FaLinkedin size={30}/>
         </button>
       </div>
