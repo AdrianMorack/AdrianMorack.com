@@ -10,16 +10,16 @@ function App() {
       <div className="App">
         <nav style={{
           padding: '20px',
-          background: '#282c34',
-          borderBottom: '2px solid #61dafb'
+          background: '#696773',
+          borderBottom: '2px solid #FED766'
         }}>
-          <Link to="/" style={{ margin: '0 15px', color: '#61dafb', textDecoration: 'none', fontSize: '18px' }}>
+          <Link to="/" style={{ margin: '0 15px', color: '#FED766', textDecoration: 'none', fontSize: '18px' }}>
             Home
           </Link>
-          <Link to="/about" style={{ margin: '0 15px', color: '#61dafb', textDecoration: 'none', fontSize: '18px' }}>
+          <Link to="/about" style={{ margin: '0 15px', color: '#FED766', textDecoration: 'none', fontSize: '18px' }}>
             About
           </Link>
-          <Link to="/contact" style={{ margin: '0 15px', color: '#61dafb', textDecoration: 'none', fontSize: '18px' }}>
+          <Link to="/contact" style={{ margin: '0 15px', color: '#FED766', textDecoration: 'none', fontSize: '18px' }}>
             Contact
           </Link>
         </nav>

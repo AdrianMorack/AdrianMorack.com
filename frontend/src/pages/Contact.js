@@ -18,12 +18,21 @@ function Contact() {
     });
   };
 
+  const inputStyle = {
+    width: '100%',
+    padding: '10px',
+    fontSize: '1rem',
+    borderRadius: '4px',
+    border: '1px solid #EFF1F3',
+    boxSizing: 'border-box'
+  };
+
   return (
     <div>
       <h1>Contact Me</h1>
       
       {!submitted ? (
-        <form onSubmit={handleSubmit} style={{ maxWidth: '500px', marginTop: '20px' }}>
+        <form onSubmit={handleSubmit} style={{ maxWidth: '90%', width: '500px', margin: '20px auto' }}>
           <div style={{ marginBottom: '15px' }}>
             <input
               type="text"
@@ -32,13 +41,7 @@ function Contact() {
               value={formData.name}
               onChange={handleChange}
               required
-              style={{
-                width: '100%',
-                padding: '10px',
-                fontSize: '16px',
-                borderRadius: '4px',
-                border: '1px solid #ccc'
-              }}
+              style={inputStyle}
             />
           </div>
           
@@ -50,13 +53,7 @@ function Contact() {
               value={formData.email}
               onChange={handleChange}
               required
-              style={{
-                width: '100%',
-                padding: '10px',
-                fontSize: '16px',
-                borderRadius: '4px',
-                border: '1px solid #ccc'
-              }}
+              style={inputStyle}
             />
           </div>
           
@@ -68,29 +65,23 @@ function Contact() {
               onChange={handleChange}
               required
               rows="5"
-              style={{
-                width: '100%',
-                padding: '10px',
-                fontSize: '16px',
-                borderRadius: '4px',
-                border: '1px solid #ccc'
-              }}
+              style={inputStyle}
             />
           </div>
           
-          <button type="submit" style={{
-            padding: '10px 20px',
-            fontSize: '16px',
-            cursor: 'pointer',
-            background: '#61dafb',
-            border: 'none',
-            borderRadius: '4px'
-          }}>
+          <button type="submit">
             Send Message
           </button>
         </form>
       ) : (
-        <div style={{ marginTop: '20px', padding: '20px', background: '#d4edda', borderRadius: '4px' }}>
+        <div style={{ 
+          maxWidth: '90%', 
+          width: '500px', 
+          margin: '20px auto', 
+          padding: '20px', 
+          background: '#EFF1F3', 
+          borderRadius: '4px' 
+        }}>
           <p>Thank you for your message! I'll get back to you soon.</p>
         </div>
       )}
