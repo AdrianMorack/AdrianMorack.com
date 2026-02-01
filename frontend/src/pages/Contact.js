@@ -1,15 +1,38 @@
 import { useState } from 'react';
 
 function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [status, setStatus] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    // Here you would typically send the data to your backend
-  };
+    setStatus('Sending...');
+
+    try { 
+      const response = await fetch('http://localhost:5001/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        setStatus('Message sent successfully!');
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setStatus('Failed to send message.');
+      }
+    } catch (error) {
+      setStatus('An error occurred. Please try again later.');
+    }
+  }
 
   const handleChange = (e) => {
     setFormData({
@@ -97,6 +120,8 @@ function Contact() {
             />
           </div>
           
+          {status && <p style={{ color: '#FED766', marginTop: '1rem' }}>{status}</p>}
+
           <button 
             type="submit"
             style={{
