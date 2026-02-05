@@ -84,28 +84,30 @@ function Skills() {
     <div style={{ 
       minHeight: '100vh',
       background: 'linear-gradient(135deg, #272932 0%, #1a1a24 100%)',
-      padding: '20px'
+      padding: isMobile ? '10px' : '20px'
     }}>
-      {/* My name stays fixed on the left while everything else scrolls */}
-      <div style={{ 
-        position: 'fixed',
-        fontSize: '3rem', 
-        fontWeight: '700',
-        top: '150px',
-        left: '50px',
-        width: '350px',
-        color: '#FED766',
-        textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
-        lineHeight: '1.2'
-      }}>
-        Adrian Morack
-      </div>
+      {/* My name stays fixed on the left while everything else scrolls (desktop only) */}
+      {!isMobile && (
+        <div style={{ 
+          position: 'fixed',
+          fontSize: '3rem', 
+          fontWeight: '700',
+          top: '150px',
+          left: '50px',
+          width: '350px',
+          color: '#FED766',
+          textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+          lineHeight: '1.2'
+        }}>
+          Adrian Morack
+        </div>
+      )}
 
       {/* Main content area - scrollable */}
       <div style={{ 
-        marginLeft: '500px', // Make room for the fixed name on the left
-        padding: '20px',
-        maxWidth: '700px'
+        marginLeft: isMobile ? '0' : '500px', // Make room for the fixed name on the left (desktop only)
+        padding: isMobile ? '10px' : '20px',
+        maxWidth: isMobile ? '100%' : '700px'
       }}>
         {/* Page title */}
         <h2 style={{ 

@@ -41,17 +41,19 @@ function App() {
           zIndex: 1000,
           boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
           display: 'flex',
-          flexDirection: isMobile ? 'column' : 'row',
-          gap: isMobile ? '15px' : '10px',
+          flexDirection: 'row',
+          gap: '10px',
           alignItems: 'center',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
+          flexWrap: isMobile ? 'wrap' : 'nowrap'
         }}>
           <div style={{ 
             display: 'flex', 
             gap: isMobile ? '5px' : '10px', 
             alignItems: 'center',
             flexWrap: 'wrap',
-            justifyContent: 'center'
+            justifyContent: isMobile ? 'flex-start' : 'center',
+            flex: isMobile ? '1' : 'unset'
           }}>
           <Link 
             to="/" 
@@ -143,7 +145,8 @@ function App() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              minWidth: isMobile ? '80px' : 'auto'
+              minWidth: isMobile ? '70px' : 'auto',
+              marginLeft: isMobile ? 'auto' : '0'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = '#FED766';
