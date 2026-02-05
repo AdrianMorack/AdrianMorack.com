@@ -1,27 +1,29 @@
 import express, { Request, Response } from 'express';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 const router = express.Router();
 
-// Configure email transporter
-const transporter = nodemailer.createTransport({
-    service: 'gmail', // or 'outlook', 'yahoo', etc.
-    auth: {
-        user: 'acmorack@gmail.com', 
-        pass: 'jimq gnbo clcd wxap' 
-    }
-});
-
 router.post('/contact', async (req: Request, res: Response) => {
+    console.log('Received contact form request:', req.body);
+    
     try { 
         const { name, email, message } = req.body;
 
-        // Email options
-        const mailOptions = {
-            from: email, // Sender's email
-            to: 'acmorack@gmail.com', 
+        if (!name || !email || !message) {
+            return res.status(400).json({ message: 'Missing required fields' });
+        }
+
+        console.log('Attempting to send email via Resend...');
+
+        // Initialize Resend with API key
+        const resend = new Resend(process.env.RESENDAPIKEY);
+
+        // Send email using Resend
+        const result = await resend.emails.send({
+            from: 'onboarding@resend.dev',
+            to: 'acmorack@gmail.com',
+            replyTo: email,
             subject: `Contact Form: Message from ${name}`,
-            text: message,
             html: `
                 <h3>New Contact Form Submission</h3>
                 <p><strong>Name:</strong> ${name}</p>
@@ -29,16 +31,17 @@ router.post('/contact', async (req: Request, res: Response) => {
                 <p><strong>Message:</strong></p>
                 <p>${message}</p>
             `
-        };
+        });
 
-        // Send email
-        await transporter.sendMail(mailOptions);
-
-        console.log('Contact form submitted:', { name, email, message });
-        res.status(200).json({ message: 'Contact form submitted successfully' });
-    } catch (error) {
+        console.log('Email sent successfully:', result);
+        return res.status(200).json({ message: 'Contact form submitted successfully' });
+    } catch (error: any) {
         console.error('Error submitting contact form:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        console.error('Error details:', error.message, error.statusCode);
+        return res.status(500).json({ 
+            message: 'Internal server error',
+            error: error.message 
+        });
     }
 });
 
