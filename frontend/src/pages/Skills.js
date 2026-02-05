@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 function Skills() {
@@ -7,6 +7,16 @@ function Skills() {
   
   // Track which skills are currently expanded (opened)
   const [expandedSkills, setExpandedSkills] = useState([]);
+  
+  // Track if user is on mobile device
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Update mobile state on window resize
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // All my skills organized by category - employers can scan quickly
   const skillCategories = [
@@ -99,8 +109,8 @@ function Skills() {
       }}>
         {/* Page title */}
         <h2 style={{ 
-          marginBottom: '30px',
-          fontSize: '2rem',
+          marginBottom: isMobile ? '20px' : '30px',
+          fontSize: isMobile ? '1.5rem' : '2rem',
           color: '#FED766',
           borderBottom: '3px solid #009FB7',
           paddingBottom: '10px',
@@ -114,11 +124,11 @@ function Skills() {
           <div key={categoryIndex} style={{ marginBottom: '40px' }}>
             {/* Category header (like "Professional Experience") */}
             <h3 style={{
-              fontSize: '1.5rem',
+              fontSize: isMobile ? '1.2rem' : '1.5rem',
               color: '#FED766',
               fontWeight: '600',
-              marginBottom: '20px',
-              marginTop: categoryIndex === 0 ? '0' : '30px',
+              marginBottom: isMobile ? '15px' : '20px',
+              marginTop: categoryIndex === 0 ? '0' : (isMobile ? '20px' : '30px'),
               paddingBottom: '8px',
               borderBottom: '2px solid rgba(254, 215, 102, 0.3)'
             }}>
@@ -136,18 +146,18 @@ function Skills() {
                       onClick={() => toggleSkill(categoryIndex, skillIndex)}
                       style={{ 
                         cursor: 'pointer',
-                        padding: '18px 20px',
+                        padding: isMobile ? '14px 16px' : '18px 20px',
                         // Change color if this skill is expanded
                         background: expandedSkills.includes(key) 
                           ? 'linear-gradient(135deg, #009FB7 0%, #0077b6 100%)'
                           : 'linear-gradient(135deg, #009FB7 0%, #007BA7 100%)',
-                        borderRadius: '12px',
-                        marginBottom: expandedSkills.includes(key) ? '12px' : '0',
+                        borderRadius: isMobile ? '10px' : '12px',
+                        marginBottom: expandedSkills.includes(key) ? (isMobile ? '10px' : '12px') : '0',
                         transition: 'all 0.3s ease', // Smooth animations
                         boxShadow: expandedSkills.includes(key) 
                           ? '0 6px 20px rgba(0,159,183,0.4)' 
                           : '0 3px 10px rgba(0,0,0,0.2)',
-                        fontSize: '1.1rem',
+                        fontSize: isMobile ? '0.95rem' : '1.1rem',
                         fontWeight: '600',
                         transform: expandedSkills.includes(key) ? 'translateY(-2px)' : 'none'
                       }}
@@ -175,13 +185,13 @@ function Skills() {
                     {/* Show the details only if this skill is expanded */}
                     {expandedSkills.includes(key) && (
                       <div style={{
-                        padding: '20px',
+                        padding: isMobile ? '15px' : '20px',
                         background: 'linear-gradient(135deg, #696773 0%, #5a5a66 100%)',
-                        borderRadius: '12px',
-                        marginBottom: '10px',
+                        borderRadius: isMobile ? '10px' : '12px',
+                        marginBottom: isMobile ? '8px' : '10px',
                         boxShadow: '0 3px 15px rgba(0,0,0,0.3)',
                         lineHeight: '1.6',
-                        fontSize: '1rem',
+                        fontSize: isMobile ? '0.9rem' : '1rem',
                         border: '1px solid rgba(254, 215, 102, 0.2)'
                       }}>
                         {t(skill.detailsKey)}

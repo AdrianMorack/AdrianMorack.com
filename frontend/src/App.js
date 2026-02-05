@@ -5,6 +5,7 @@
 import './App.css';
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useState, useEffect } from 'react';
 import Home from './pages/Home';
 import Skills from './pages/Skills';
 import Contact from './pages/Contact';
@@ -12,6 +13,16 @@ import Contact from './pages/Contact';
 function App() {
   // Hook for translations - provides t() function and i18n instance
   const { t, i18n } = useTranslation();
+  
+  // Track if user is on mobile device
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Update mobile state on window resize
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Toggle between English and German
   const toggleLanguage = () => {
@@ -23,27 +34,34 @@ function App() {
       <div className="App">
         {/* Navigation bar with links and language toggle */}
         <nav style={{
-          padding: '20px 40px',
+          padding: isMobile ? '15px 15px' : '20px 40px',
           background: 'linear-gradient(135deg, #696773 0%, #5a5a66 100%)',
           borderBottom: '3px solid #FED766',
           position: 'relative',
           zIndex: 1000,
           boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
           display: 'flex',
-          gap: '10px',
+          flexDirection: isMobile ? 'column' : 'row',
+          gap: isMobile ? '15px' : '10px',
           alignItems: 'center',
           justifyContent: 'space-between'
         }}>
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <div style={{ 
+            display: 'flex', 
+            gap: isMobile ? '5px' : '10px', 
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            justifyContent: 'center'
+          }}>
           <Link 
             to="/" 
             style={{ 
-              margin: '0 10px', 
+              margin: isMobile ? '0 5px' : '0 10px', 
               color: '#FED766', 
               textDecoration: 'none', 
-              fontSize: '1.1rem',
+              fontSize: isMobile ? '0.95rem' : '1.1rem',
               fontWeight: '600',
-              padding: '10px 20px',
+              padding: isMobile ? '8px 15px' : '10px 20px',
               borderRadius: '8px',
               transition: 'all 0.3s ease',
               background: 'transparent'
@@ -62,12 +80,12 @@ function App() {
           <Link 
             to="/skills" 
             style={{ 
-              margin: '0 10px', 
+              margin: isMobile ? '0 5px' : '0 10px', 
               color: '#FED766', 
               textDecoration: 'none', 
-              fontSize: '1.1rem',
+              fontSize: isMobile ? '0.95rem' : '1.1rem',
               fontWeight: '600',
-              padding: '10px 20px',
+              padding: isMobile ? '8px 15px' : '10px 20px',
               borderRadius: '8px',
               transition: 'all 0.3s ease',
               background: 'transparent'
@@ -86,12 +104,12 @@ function App() {
           <Link 
             to="/contact" 
             style={{ 
-              margin: '0 10px', 
+              margin: isMobile ? '0 5px' : '0 10px', 
               color: '#FED766', 
               textDecoration: 'none', 
-              fontSize: '1.1rem',
+              fontSize: isMobile ? '0.95rem' : '1.1rem',
               fontWeight: '600',
-              padding: '10px 20px',
+              padding: isMobile ? '8px 15px' : '10px 20px',
               borderRadius: '8px',
               transition: 'all 0.3s ease',
               background: 'transparent'
@@ -117,14 +135,15 @@ function App() {
               color: '#FED766',
               border: '2px solid #FED766',
               borderRadius: '8px',
-              padding: '10px 20px',
-              fontSize: '1rem',
+              padding: isMobile ? '8px 12px' : '10px 15px',
+              fontSize: isMobile ? '0.9rem' : '1rem',
               fontWeight: '600',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
               display: 'flex',
               alignItems: 'center',
-              gap: '8px'
+              justifyContent: 'center',
+              minWidth: isMobile ? '80px' : 'auto'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = '#FED766';
@@ -137,8 +156,8 @@ function App() {
               e.currentTarget.style.transform = 'translateY(0)';
             }}
           >
-            <span style={{ fontSize: '1.2rem' }}>🌐</span>
-            {i18n.language === 'en' ? 'DE' : 'EN'}
+            <span style={{ fontSize: '1.2rem' }}></span>
+            {i18n.language === 'en' ? '🇩🇪 DE' : '🇬🇧 EN'}
           </button>
         </nav>
 

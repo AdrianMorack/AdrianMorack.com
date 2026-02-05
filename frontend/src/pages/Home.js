@@ -3,10 +3,21 @@
 
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { useState, useEffect } from 'react';
 
 function Home() {
   // Hook for translations - switches between English and German
   const { t } = useTranslation();
+  
+  // Track if user is on mobile device
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Update mobile state on window resize
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   // Open GitHub profile in new tab
   const githubURL = () => {
@@ -32,20 +43,22 @@ function Home() {
       marginTop: '-10vh'
     }}>
       <h1 style={{
-        fontSize: '3.5rem',
+        fontSize: isMobile ? '1.8rem' : '3.5rem',
         fontWeight: '700',
         marginBottom: '1rem',
         color: '#FED766',
         textShadow: '2px 2px 8px rgba(0,0,0,0.3)',
-        lineHeight: '1.2'
+        lineHeight: '1.2',
+        padding: isMobile ? '0 10px' : '0'
       }}>
         {t('home.welcome')}
       </h1>
       <p style={{
-        fontSize: '1.5rem',
+        fontSize: isMobile ? '1rem' : '1.5rem',
         color: '#009FB7',
-        marginBottom: '3rem',
-        fontWeight: '300'
+        marginBottom: isMobile ? '2rem' : '3rem',
+        fontWeight: '300',
+        padding: isMobile ? '0 10px' : '0'
       }}>
         {t('home.subtitle')}
       </p>
@@ -53,14 +66,18 @@ function Home() {
       {/* Social media buttons - GitHub and LinkedIn */}
       <div style={{
         display: 'flex',
-        gap: '20px',
-        marginTop: '2rem'
+        flexDirection: isMobile ? 'column' : 'row',
+        gap: isMobile ? '15px' : '20px',
+        marginTop: '2rem',
+        width: isMobile ? '100%' : 'auto',
+        padding: isMobile ? '0 20px' : '0',
+        boxSizing: 'border-box'
       }}>
         <button 
           onClick={githubURL}
           style={{
-            padding: '15px 30px',
-            fontSize: '1.1rem',
+            padding: isMobile ? '12px 20px' : '15px 30px',
+            fontSize: isMobile ? '1rem' : '1.1rem',
             background: 'linear-gradient(135deg, #009FB7 0%, #007BA7 100%)',
             border: 'none',
             borderRadius: '12px',
@@ -68,10 +85,12 @@ function Home() {
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'center',
             gap: '10px',
             boxShadow: '0 4px 15px rgba(0,159,183,0.3)',
             transition: 'all 0.3s ease',
-            fontWeight: '600'
+            fontWeight: '600',
+            width: isMobile ? '100%' : 'auto'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-3px)';
@@ -88,8 +107,8 @@ function Home() {
         <button 
           onClick={linkedinURL}
           style={{
-            padding: '15px 30px',
-            fontSize: '1.1rem',
+            padding: isMobile ? '12px 20px' : '15px 30px',
+            fontSize: isMobile ? '1rem' : '1.1rem',
             background: 'linear-gradient(135deg, #FED766 0%, #f5c942 100%)',
             border: 'none',
             borderRadius: '12px',
@@ -97,10 +116,12 @@ function Home() {
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'center',
             gap: '10px',
             boxShadow: '0 4px 15px rgba(254,215,102,0.3)',
             transition: 'all 0.3s ease',
-            fontWeight: '600'
+            fontWeight: '600',
+            width: isMobile ? '100%' : 'auto'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-3px)';

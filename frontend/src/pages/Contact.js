@@ -2,7 +2,7 @@
 // Submits data to backend API which sends email via Resend
 // Shows success message after submission
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 function Contact() {
@@ -17,6 +17,16 @@ function Contact() {
   });
   const [status, setStatus] = useState(''); // Status message (sending/success/error)
   const [submitted, setSubmitted] = useState(false); // Whether form was successfully submitted
+  
+  // Track if user is on mobile device
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Update mobile state on window resize
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Handle form submission - sends data to backend API
   const handleSubmit = async (e) => {
@@ -59,8 +69,8 @@ function Contact() {
   // Reusable style object for all form inputs
   const inputStyle = {
     width: '100%',
-    padding: '15px',
-    fontSize: '1rem',
+    padding: isMobile ? '12px' : '15px',
+    fontSize: isMobile ? '0.95rem' : '1rem',
     borderRadius: '10px',
     border: '2px solid #696773',
     boxSizing: 'border-box',
@@ -79,9 +89,9 @@ function Contact() {
       padding: '3rem 2rem'
     }}>
       <h1 style={{
-        fontSize: '3rem',
+        fontSize: isMobile ? '2rem' : '3rem',
         fontWeight: '700',
-        marginBottom: '2rem',
+        marginBottom: isMobile ? '1.5rem' : '2rem',
         color: '#FED766',
         textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
       }}>{t('contact.title')}</h1>
@@ -90,10 +100,10 @@ function Contact() {
           onSubmit={handleSubmit} 
           style={{ 
             maxWidth: '90%', 
-            width: '600px', 
+            width: isMobile ? '100%' : '600px', 
             margin: '0 auto',
             background: 'linear-gradient(135deg, rgba(105,103,115,0.2) 0%, rgba(90,90,102,0.2) 100%)',
-            padding: '40px',
+            padding: isMobile ? '25px 20px' : '40px',
             borderRadius: '16px',
             boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
             backdropFilter: 'blur(10px)'
@@ -141,8 +151,8 @@ function Contact() {
             type="submit"
             style={{
               width: '100%',
-              padding: '15px',
-              fontSize: '1.2rem',
+              padding: isMobile ? '12px' : '15px',
+              fontSize: isMobile ? '1rem' : '1.2rem',
               fontWeight: '600',
               background: 'linear-gradient(135deg, #009FB7 0%, #007BA7 100%)',
               color: 'white',
@@ -168,16 +178,16 @@ function Contact() {
       ) : (
         <div style={{ 
           maxWidth: '90%', 
-          width: '600px', 
+          width: isMobile ? '100%' : '600px', 
           margin: '0 auto', 
-          padding: '40px', 
+          padding: isMobile ? '30px 20px' : '40px', 
           background: 'linear-gradient(135deg, #009FB7 0%, #007BA7 100%)', 
           borderRadius: '16px',
           boxShadow: '0 8px 32px rgba(0,159,183,0.4)',
           textAlign: 'center'
         }}>
           <p style={{
-            fontSize: '1.3rem',
+            fontSize: isMobile ? '1.1rem' : '1.3rem',
             fontWeight: '600',
             color: 'white',
             margin: 0
