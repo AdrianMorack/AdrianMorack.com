@@ -49,21 +49,21 @@ function App() {
         }}>
           <div style={{ 
             display: 'flex', 
-            gap: isMobile ? '5px' : '10px', 
+            gap: isMobile ? '2px' : '10px', 
             alignItems: 'center',
-            flexWrap: 'wrap',
+            flexWrap: 'nowrap',
             justifyContent: isMobile ? 'flex-start' : 'center',
             flex: isMobile ? '1' : 'unset'
           }}>
           <Link 
             to="/" 
             style={{ 
-              margin: isMobile ? '0 5px' : '0 10px', 
+              margin: isMobile ? '0 2px' : '0 10px', 
               color: '#FED766', 
               textDecoration: 'none', 
-              fontSize: isMobile ? '0.95rem' : '1.1rem',
+              fontSize: isMobile ? '0.85rem' : '1.1rem',
               fontWeight: '600',
-              padding: isMobile ? '8px 15px' : '10px 20px',
+              padding: isMobile ? '8px 10px' : '10px 20px',
               borderRadius: '8px',
               transition: 'all 0.3s ease',
               background: 'transparent'
@@ -82,12 +82,12 @@ function App() {
           <Link 
             to="/skills" 
             style={{ 
-              margin: isMobile ? '0 5px' : '0 10px', 
+              margin: isMobile ? '0 2px' : '0 10px', 
               color: '#FED766', 
               textDecoration: 'none', 
-              fontSize: isMobile ? '0.95rem' : '1.1rem',
+              fontSize: isMobile ? '0.85rem' : '1.1rem',
               fontWeight: '600',
-              padding: isMobile ? '8px 15px' : '10px 20px',
+              padding: isMobile ? '8px 10px' : '10px 20px',
               borderRadius: '8px',
               transition: 'all 0.3s ease',
               background: 'transparent'
@@ -106,12 +106,12 @@ function App() {
           <Link 
             to="/contact" 
             style={{ 
-              margin: isMobile ? '0 5px' : '0 10px', 
+              margin: isMobile ? '0 2px' : '0 10px', 
               color: '#FED766', 
               textDecoration: 'none', 
-              fontSize: isMobile ? '0.95rem' : '1.1rem',
+              fontSize: isMobile ? '0.85rem' : '1.1rem',
               fontWeight: '600',
-              padding: isMobile ? '8px 15px' : '10px 20px',
+              padding: isMobile ? '8px 10px' : '10px 20px',
               borderRadius: '8px',
               transition: 'all 0.3s ease',
               background: 'transparent'
