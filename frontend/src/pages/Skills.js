@@ -1,28 +1,29 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function About() {
+  const { t } = useTranslation();
   const [expandedSkills, setExpandedSkills] = useState([]);
 
   const skills = [
-    { name: 'Containerization', details: 'Worked for a company in containerizing all aspects of an AI including, the AI model, database, frontend, and backend using Docker to ensure scalability and ease of deployment across various environments.' },
-    { name: 'AI Integrations', details: 'Worked for a company to implement an AI chatbot into their webhook system, enhancing customer interaction and support efficiency through intelligent automation.' },
-    { name: 'Programming Fundamentals', details: 'Proficient in foundational programming concepts including variables, control structures, functions, and basic data types used in multiple languages.' },
-    { name: 'Object-Oriented Design', details: 'Skilled in object-oriented programming and design principles for writing modular and maintainable code.' },
-    { name: 'Data Structures & Algorithms', details: 'Expertise in core data structures (lists, trees, graphs, hash tables) and algorithmic problem solving including analysis of complexity.' },
-    { name: 'Software Development Lifecycle', details: 'Understanding and application of software engineering principles, including design, implementation, testing, and maintenance. This also includes creating CI/CD pipelines, automated testing, and deployment strategies.' },
-    { name: 'Operating Systems Concepts', details: 'Knowledge of operating system principles such as processes, threads, scheduling, memory management, and file systems.' },
-    { name: 'Database Management', details: 'Ability to design, implement, and query relational databases and understand data persistence using SQL and related tools.' },
-    { name: 'Computer Organization & Architecture', details: 'Understanding of the structure and functioning of computer hardware and low-level software interaction.' },
-    { name: 'Computer Networks', details: 'Familiarity with networking principles, protocols, and communication mechanisms in distributed systems.' },
-    { name: 'Discrete Mathematics & Formal Reasoning', details: 'Mastery of mathematical foundations including logic, discrete structures, proofs, and reasoning essential for CS theory.' },
-    { name: 'Software Tools & Practices', details: 'Practical skills in development environments, version control, debugging, and industry-relevant tooling.' },
-    { name: 'Cybersecurity Fundamentals', details: 'Introductory skills in securing systems and understanding privacy, threats, and protective measures.' },
-    { name: 'Data Science & AI Basics', details: 'Fundamentals in data analysis, machine learning, and data-driven computing for intelligent systems.' },
-    { name: 'Parallel & Distributed Computing', details: 'Experience with parallel programming and distributed systems for high-performance applications.' },
-    { name: 'Professional Communication', details: 'Effective written and oral communication skills for technical and collaborative computing contexts.' },
-    { name: 'Teamwork & Leadership', details: 'Ability to work in teams, lead small groups, and participate in collaborative development projects.' },
-    { name: 'Ethical & Legal Computing Practice', details: 'Understanding of ethical, legal, and societal implications of computing decisions and professional responsibilities.' }
-
+    { nameKey: 'skills.containerization', detailsKey: 'skills.containerizationDetails' },
+    { nameKey: 'skills.aiIntegrations', detailsKey: 'skills.aiIntegrationsDetails' },
+    { nameKey: 'skills.programmingFundamentals', detailsKey: 'skills.programmingFundamentalsDetails' },
+    { nameKey: 'skills.objectOriented', detailsKey: 'skills.objectOrientedDetails' },
+    { nameKey: 'skills.dataStructures', detailsKey: 'skills.dataStructuresDetails' },
+    { nameKey: 'skills.softwareDevelopment', detailsKey: 'skills.softwareDevelopmentDetails' },
+    { nameKey: 'skills.operatingSystems', detailsKey: 'skills.operatingSystemsDetails' },
+    { nameKey: 'skills.databaseManagement', detailsKey: 'skills.databaseManagementDetails' },
+    { nameKey: 'skills.computerOrganization', detailsKey: 'skills.computerOrganizationDetails' },
+    { nameKey: 'skills.computerNetworks', detailsKey: 'skills.computerNetworksDetails' },
+    { nameKey: 'skills.discreteMath', detailsKey: 'skills.discreteMathDetails' },
+    { nameKey: 'skills.softwareTools', detailsKey: 'skills.softwareToolsDetails' },
+    { nameKey: 'skills.cybersecurity', detailsKey: 'skills.cybersecurityDetails' },
+    { nameKey: 'skills.dataScience', detailsKey: 'skills.dataScienceDetails' },
+    { nameKey: 'skills.parallelComputing', detailsKey: 'skills.parallelComputingDetails' },
+    { nameKey: 'skills.communication', detailsKey: 'skills.communicationDetails' },
+    { nameKey: 'skills.teamwork', detailsKey: 'skills.teamworkDetails' },
+    { nameKey: 'skills.ethics', detailsKey: 'skills.ethicsDetails' }
   ];
 
   const toggleSkill = (index) => {
@@ -77,7 +78,7 @@ function About() {
           paddingBottom: '10px',
           fontWeight: '600'
         }}>
-          Skills & Expertise
+          {t('skills.title')}
         </h2>
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {skills.map((skill, index) => (
@@ -116,7 +117,7 @@ function About() {
                 <span style={{ marginRight: '10px' }}>
                   {expandedSkills.includes(index) ? '▼' : '▶'}
                 </span>
-                {skill.name}
+                {t(skill.nameKey)}
               </div>
               {expandedSkills.includes(index) && (
                 <div style={{
@@ -129,7 +130,7 @@ function About() {
                   fontSize: '1rem',
                   border: '1px solid rgba(254, 215, 102, 0.2)'
                 }}>
-                  {skill.details}
+                  {t(skill.detailsKey)}
                 </div>
               )}
             </li>

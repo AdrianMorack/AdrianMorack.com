@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function Contact() {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,7 +13,7 @@ function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus('Sending...');
+    setStatus(t('contact.sending'));
 
     try { 
       const response = await fetch('http://localhost:5001/api/contact', {
@@ -23,14 +25,14 @@ function Contact() {
       });
 
       if (response.ok) {
-        setStatus('Message sent successfully!');
+        setStatus(t('contact.success'));
         setSubmitted(true);
         setFormData({ name: '', email: '', message: '' });
       } else {
-        setStatus('Failed to send message.');
+        setStatus(t('contact.error'));
       }
     } catch (error) {
-      setStatus('An error occurred. Please try again later.');
+      setStatus(t('contact.error'));
     }
   }
 
@@ -68,7 +70,7 @@ function Contact() {
         marginBottom: '2rem',
         color: '#FED766',
         textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
-      }}>Contact Me</h1>
+      }}>{t('contact.title')}</h1>
       
       {!submitted ? (
         <form 
@@ -88,7 +90,7 @@ function Contact() {
             <input
               type="text"
               name="name"
-              placeholder="Your Name"
+              placeholder={t('contact.name')}
               value={formData.name}
               onChange={handleChange}
               required
@@ -100,7 +102,7 @@ function Contact() {
             <input
               type="email"
               name="email"
-              placeholder="Your Email"
+              placeholder={t('contact.email')}
               value={formData.email}
               onChange={handleChange}
               required
@@ -111,7 +113,7 @@ function Contact() {
           <div style={{ marginBottom: '15px' }}>
             <textarea
               name="message"
-              placeholder="Your Message"
+              placeholder={t('contact.message')}
               value={formData.message}
               onChange={handleChange}
               required
@@ -147,7 +149,7 @@ function Contact() {
               e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,159,183,0.3)';
             }}
           >
-            Send Message
+            {t('contact.send')}
           </button>
         </form>
       ) : (

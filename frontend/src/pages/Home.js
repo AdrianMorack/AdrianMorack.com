@@ -1,6 +1,8 @@
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 function Home() {
+  const { t } = useTranslation();
   const githubURL = () => {
     window.open('https://github.com/AdrianMorack', '_blank');
   };
@@ -29,7 +31,7 @@ function Home() {
         textShadow: '2px 2px 8px rgba(0,0,0,0.3)',
         lineHeight: '1.2'
       }}>
-        Welcome to Adrian Morack's Website
+        {t('home.welcome')}
       </h1>
       <p style={{
         fontSize: '1.5rem',
@@ -37,7 +39,7 @@ function Home() {
         marginBottom: '3rem',
         fontWeight: '300'
       }}>
-        Full Stack Development | AI Integration | Systems Administation
+        {t('home.subtitle')}
       </p>
       
       <div style={{
@@ -72,7 +74,7 @@ function Home() {
           }}
         >
           <FaGithub size={30}/>
-          GitHub
+          {t('home.github')}
         </button>
         <button 
           onClick={linkedinURL}
@@ -101,7 +103,7 @@ function Home() {
           }}
         >
           <FaLinkedin size={30}/>
-          LinkedIn
+          {t('home.linkedin')}
         </button>
       </div>
     </div>
