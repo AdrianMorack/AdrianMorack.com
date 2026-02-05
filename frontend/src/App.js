@@ -1,3 +1,7 @@
+// Main App component - handles routing and navigation
+// Provides language switching between English and German
+// Uses HashRouter for GitHub Pages compatibility
+
 import './App.css';
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -6,8 +10,10 @@ import Skills from './pages/Skills';
 import Contact from './pages/Contact';
 
 function App() {
+  // Hook for translations - provides t() function and i18n instance
   const { t, i18n } = useTranslation();
 
+  // Toggle between English and German
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'de' : 'en';
     i18n.changeLanguage(newLang);
@@ -15,6 +21,7 @@ function App() {
   return (
     <Router>
       <div className="App">
+        {/* Navigation bar with links and language toggle */}
         <nav style={{
           padding: '20px 40px',
           background: 'linear-gradient(135deg, #696773 0%, #5a5a66 100%)',
@@ -102,6 +109,7 @@ function App() {
           </Link>
           </div>
 
+          {/* Language toggle button - switches between EN and DE */}
           <button
             onClick={toggleLanguage}
             style={{
@@ -134,6 +142,7 @@ function App() {
           </button>
         </nav>
 
+        {/* Route definitions for all pages */}
         <Routes>
           <Route path="/" element={<div className="App-header"><Home /></div>} />
           <Route path="/skills" element={<Skills />} />

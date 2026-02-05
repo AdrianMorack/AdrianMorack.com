@@ -1,53 +1,87 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-function About() {
+function Skills() {
+  // Hook for translations - switches between English and German
   const { t } = useTranslation();
+  
+  // Track which skills are currently expanded (opened)
   const [expandedSkills, setExpandedSkills] = useState([]);
 
-  const skills = [
-    { nameKey: 'skills.containerization', detailsKey: 'skills.containerizationDetails' },
-    { nameKey: 'skills.aiIntegrations', detailsKey: 'skills.aiIntegrationsDetails' },
-    { nameKey: 'skills.programmingFundamentals', detailsKey: 'skills.programmingFundamentalsDetails' },
-    { nameKey: 'skills.objectOriented', detailsKey: 'skills.objectOrientedDetails' },
-    { nameKey: 'skills.dataStructures', detailsKey: 'skills.dataStructuresDetails' },
-    { nameKey: 'skills.softwareDevelopment', detailsKey: 'skills.softwareDevelopmentDetails' },
-    { nameKey: 'skills.operatingSystems', detailsKey: 'skills.operatingSystemsDetails' },
-    { nameKey: 'skills.databaseManagement', detailsKey: 'skills.databaseManagementDetails' },
-    { nameKey: 'skills.computerOrganization', detailsKey: 'skills.computerOrganizationDetails' },
-    { nameKey: 'skills.computerNetworks', detailsKey: 'skills.computerNetworksDetails' },
-    { nameKey: 'skills.discreteMath', detailsKey: 'skills.discreteMathDetails' },
-    { nameKey: 'skills.softwareTools', detailsKey: 'skills.softwareToolsDetails' },
-    { nameKey: 'skills.cybersecurity', detailsKey: 'skills.cybersecurityDetails' },
-    { nameKey: 'skills.dataScience', detailsKey: 'skills.dataScienceDetails' },
-    { nameKey: 'skills.parallelComputing', detailsKey: 'skills.parallelComputingDetails' },
-    { nameKey: 'skills.communication', detailsKey: 'skills.communicationDetails' },
-    { nameKey: 'skills.teamwork', detailsKey: 'skills.teamworkDetails' },
-    { nameKey: 'skills.ethics', detailsKey: 'skills.ethicsDetails' }
+  // All my skills organized by category - employers can scan quickly
+  const skillCategories = [
+    {
+      title: t('skills.titleProfessional'),
+      skills: [
+        { nameKey: 'skills.containerization', detailsKey: 'skills.containerizationDetails' },
+        { nameKey: 'skills.aiIntegrations', detailsKey: 'skills.aiIntegrationsDetails' }
+      ]
+    },
+    {
+      title: t('skills.titleSoftware'),
+      skills: [
+        { nameKey: 'skills.programmingFundamentals', detailsKey: 'skills.programmingFundamentalsDetails' },
+        { nameKey: 'skills.objectOriented', detailsKey: 'skills.objectOrientedDetails' },
+        { nameKey: 'skills.dataStructures', detailsKey: 'skills.dataStructuresDetails' },
+        { nameKey: 'skills.softwareDevelopment', detailsKey: 'skills.softwareDevelopmentDetails' },
+        { nameKey: 'skills.softwareTools', detailsKey: 'skills.softwareToolsDetails' }
+      ]
+    },
+    {
+      title: t('skills.titleData'),
+      skills: [
+        { nameKey: 'skills.dataScience', detailsKey: 'skills.dataScienceDetails' },
+        { nameKey: 'skills.databaseManagement', detailsKey: 'skills.databaseManagementDetails' },
+        { nameKey: 'skills.discreteMath', detailsKey: 'skills.discreteMathDetails' }
+      ]
+    },
+    {
+      title: t('skills.titleSystems'),
+      skills: [
+        { nameKey: 'skills.operatingSystems', detailsKey: 'skills.operatingSystemsDetails' },
+        { nameKey: 'skills.computerNetworks', detailsKey: 'skills.computerNetworksDetails' },
+        { nameKey: 'skills.parallelComputing', detailsKey: 'skills.parallelComputingDetails' },
+        { nameKey: 'skills.computerOrganization', detailsKey: 'skills.computerOrganizationDetails' }
+      ]
+    },
+    {
+      title: t('skills.titleSecurity'),
+      skills: [
+        { nameKey: 'skills.cybersecurity', detailsKey: 'skills.cybersecurityDetails' },
+        { nameKey: 'skills.ethics', detailsKey: 'skills.ethicsDetails' }
+      ]
+    },
+    {
+      title: t('skills.titleSoftSkills'),
+      skills: [
+        { nameKey: 'skills.communication', detailsKey: 'skills.communicationDetails' },
+        { nameKey: 'skills.teamwork', detailsKey: 'skills.teamworkDetails' }
+      ]
+    }
   ];
 
-  const toggleSkill = (index) => {
+  // Handle clicking on a skill - open it if closed, close it if open
+  const toggleSkill = (categoryIndex, skillIndex) => {
+    const key = `${categoryIndex}-${skillIndex}`;
     setExpandedSkills(prev => 
-      prev.includes(index) 
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
+      prev.includes(key) 
+        ? prev.filter(i => i !== key) // Remove it if it's already open
+        : [...prev, key] // Add it if it's closed
     );
   };
 
   return (
     <div style={{ 
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #1e1e2e 0%, #272738 100%)',
-      color: '#EFF1F3',
-      paddingTop: '3rem',
-      paddingBottom: '3rem'
+      background: 'linear-gradient(135deg, #272932 0%, #1a1a24 100%)',
+      padding: '20px'
     }}>
-      {/* Fixed left side */}
+      {/* My name stays fixed on the left while everything else scrolls */}
       <div style={{ 
         position: 'fixed',
         fontSize: '3rem', 
         fontWeight: '700',
-        top: '110px',
+        top: '150px',
         left: '50px',
         width: '350px',
         color: '#FED766',
@@ -55,21 +89,15 @@ function About() {
         lineHeight: '1.2'
       }}>
         Adrian Morack
-        <div style={{ 
-          fontSize: '1.2rem', 
-          color: '#009FB7',
-          fontWeight: '400',
-          marginTop: '0.5rem'
-        }}>
-        </div>
       </div>
 
-      {/* Scrollable right side */}
+      {/* Main content area - scrollable */}
       <div style={{ 
-        marginLeft: '500px',
+        marginLeft: '500px', // Make room for the fixed name on the left
         padding: '20px',
         maxWidth: '700px'
       }}>
+        {/* Page title */}
         <h2 style={{ 
           marginBottom: '30px',
           fontSize: '2rem',
@@ -80,65 +108,94 @@ function About() {
         }}>
           {t('skills.title')}
         </h2>
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          {skills.map((skill, index) => (
-            <li key={index} style={{ marginBottom: '15px' }}>
-              <div 
-                onClick={() => toggleSkill(index)}
-                style={{ 
-                  cursor: 'pointer',
-                  padding: '18px 20px',
-                  background: expandedSkills.includes(index) 
-                    ? 'linear-gradient(135deg, #009FB7 0%, #0077b6 100%)'
-                    : 'linear-gradient(135deg, #009FB7 0%, #007BA7 100%)',
-                  borderRadius: '12px',
-                  marginBottom: expandedSkills.includes(index) ? '12px' : '0',
-                  transition: 'all 0.3s ease',
-                  boxShadow: expandedSkills.includes(index) 
-                    ? '0 6px 20px rgba(0,159,183,0.4)' 
-                    : '0 3px 10px rgba(0,0,0,0.2)',
-                  fontSize: '1.1rem',
-                  fontWeight: '600',
-                  transform: expandedSkills.includes(index) ? 'translateY(-2px)' : 'none'
-                }}
-                onMouseEnter={(e) => {
-                  if (!expandedSkills.includes(index)) {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,159,183,0.3)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!expandedSkills.includes(index)) {
-                    e.currentTarget.style.transform = 'none';
-                    e.currentTarget.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
-                  }
-                }}
-              >
-                <span style={{ marginRight: '10px' }}>
-                  {expandedSkills.includes(index) ? '▼' : '▶'}
-                </span>
-                {t(skill.nameKey)}
-              </div>
-              {expandedSkills.includes(index) && (
-                <div style={{
-                  padding: '20px',
-                  background: 'linear-gradient(135deg, #696773 0%, #5a5a66 100%)',
-                  borderRadius: '12px',
-                  marginBottom: '10px',
-                  boxShadow: '0 3px 15px rgba(0,0,0,0.3)',
-                  lineHeight: '1.6',
-                  fontSize: '1rem',
-                  border: '1px solid rgba(254, 215, 102, 0.2)'
-                }}>
-                  {t(skill.detailsKey)}
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
+
+        {/* Loop through each category and display all skills */}
+        {skillCategories.map((category, categoryIndex) => (
+          <div key={categoryIndex} style={{ marginBottom: '40px' }}>
+            {/* Category header (like "Professional Experience") */}
+            <h3 style={{
+              fontSize: '1.5rem',
+              color: '#FED766',
+              fontWeight: '600',
+              marginBottom: '20px',
+              marginTop: categoryIndex === 0 ? '0' : '30px',
+              paddingBottom: '8px',
+              borderBottom: '2px solid rgba(254, 215, 102, 0.3)'
+            }}>
+              {category.title}
+            </h3>
+            
+            {/* Skills list for this category */}
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              {category.skills.map((skill, skillIndex) => {
+                const key = `${categoryIndex}-${skillIndex}`;
+                return (
+                  <li key={skillIndex} style={{ marginBottom: '15px' }}>
+                    {/* Clickable skill button */}
+                    <div 
+                      onClick={() => toggleSkill(categoryIndex, skillIndex)}
+                      style={{ 
+                        cursor: 'pointer',
+                        padding: '18px 20px',
+                        // Change color if this skill is expanded
+                        background: expandedSkills.includes(key) 
+                          ? 'linear-gradient(135deg, #009FB7 0%, #0077b6 100%)'
+                          : 'linear-gradient(135deg, #009FB7 0%, #007BA7 100%)',
+                        borderRadius: '12px',
+                        marginBottom: expandedSkills.includes(key) ? '12px' : '0',
+                        transition: 'all 0.3s ease', // Smooth animations
+                        boxShadow: expandedSkills.includes(key) 
+                          ? '0 6px 20px rgba(0,159,183,0.4)' 
+                          : '0 3px 10px rgba(0,0,0,0.2)',
+                        fontSize: '1.1rem',
+                        fontWeight: '600',
+                        transform: expandedSkills.includes(key) ? 'translateY(-2px)' : 'none'
+                      }}
+                      // Hover effect - lift up slightly when mouse is over it
+                      onMouseEnter={(e) => {
+                        if (!expandedSkills.includes(key)) {
+                          e.currentTarget.style.transform = 'translateY(-2px)';
+                          e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,159,183,0.3)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!expandedSkills.includes(key)) {
+                          e.currentTarget.style.transform = 'none';
+                          e.currentTarget.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
+                        }
+                      }}
+                    >
+                      {/* Arrow icon - points down if open, right if closed */}
+                      <span style={{ marginRight: '10px' }}>
+                        {expandedSkills.includes(key) ? '▼' : '▶'}
+                      </span>
+                      {t(skill.nameKey)}
+                    </div>
+                    
+                    {/* Show the details only if this skill is expanded */}
+                    {expandedSkills.includes(key) && (
+                      <div style={{
+                        padding: '20px',
+                        background: 'linear-gradient(135deg, #696773 0%, #5a5a66 100%)',
+                        borderRadius: '12px',
+                        marginBottom: '10px',
+                        boxShadow: '0 3px 15px rgba(0,0,0,0.3)',
+                        lineHeight: '1.6',
+                        fontSize: '1rem',
+                        border: '1px solid rgba(254, 215, 102, 0.2)'
+                      }}>
+                        {t(skill.detailsKey)}
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-export default About;
+export default Skills;

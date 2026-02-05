@@ -1,6 +1,11 @@
+// Internationalization (i18n) configuration
+// Provides translations for English (en) and German (de)
+// Used throughout the app with the useTranslation() hook
+
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
+// Translation resources for all supported languages
 const resources = {
   en: {
     translation: {
@@ -17,6 +22,12 @@ const resources = {
       },
       skills: {
         title: "My Skills",
+        titleProfessional: "Professional Experience",
+        titleSoftware: "Software Development & Engineering",
+        titleData: "Data & AI",
+        titleSystems: "Systems & Infrastructure",
+        titleSecurity: "Security & Best Practices",
+        titleSoftSkills: "Soft Skills",
         containerization: "Containerization",
         containerizationDetails: "Worked for a company in containerizing all aspects of an AI including, the AI model, database, frontend, and backend using Docker to ensure scalability and ease of deployment across various environments.",
         aiIntegrations: "AI Integrations",
@@ -81,6 +92,12 @@ const resources = {
       },
       skills: {
         title: "Meine Fähigkeiten",
+        titleProfessional: "Berufserfahrung",
+        titleSoftware: "Softwareentwicklung & Engineering",
+        titleData: "Daten & KI",
+        titleSystems: "Systeme & Infrastruktur",
+        titleSecurity: "Sicherheit & Best Practices",
+        titleSoftSkills: "Soziale Kompetenzen",
         containerization: "Containerisierung",
         containerizationDetails: "Arbeitete für ein Unternehmen bei der Containerisierung aller Aspekte einer KI, einschließlich des KI-Modells, der Datenbank, des Frontends und des Backends mit Docker, um Skalierbarkeit und einfache Bereitstellung in verschiedenen Umgebungen zu gewährleisten.",
         aiIntegrations: "KI-Integrationen",
@@ -132,14 +149,15 @@ const resources = {
   }
 };
 
+// Initialize i18next with React integration
 i18n
-  .use(initReactI18next)
+  .use(initReactI18next) // Pass i18n instance to react-i18next
   .init({
-    resources,
-    lng: 'en', // default language
-    fallbackLng: 'en',
+    resources, // Translation resources defined above
+    lng: 'en', // Default language (English)
+    fallbackLng: 'en', // Fallback to English if translation missing
     interpolation: {
-      escapeValue: false
+      escapeValue: false // React already escapes values, no need for double escaping
     }
   });
 

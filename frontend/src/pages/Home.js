@@ -1,18 +1,26 @@
+// Home page component - landing page with welcome message and social links
+// Features centered layout with GitHub and LinkedIn profile buttons
+
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
 function Home() {
+  // Hook for translations - switches between English and German
   const { t } = useTranslation();
+  
+  // Open GitHub profile in new tab
   const githubURL = () => {
     window.open('https://github.com/AdrianMorack', '_blank');
   };
 
+  // Open LinkedIn profile in new tab
   const linkedinURL = () => {
     window.open('https://www.linkedin.com/in/adrian-morack-10501a1a9/', '_blank');
   };
 
 
   return (
+    // Centered container for welcome message and social buttons
     <div style={{
       display: 'flex',
       flexDirection: 'column',
@@ -42,6 +50,7 @@ function Home() {
         {t('home.subtitle')}
       </p>
       
+      {/* Social media buttons - GitHub and LinkedIn */}
       <div style={{
         display: 'flex',
         gap: '20px',

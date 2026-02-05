@@ -1,10 +1,14 @@
+// Entry point for the React application
+// Initializes React, mounts the App component, and configures performance monitoring
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import './i18n';
+import './i18n'; // Import i18n configuration to initialize translations
 
+// Create root element and render the App
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

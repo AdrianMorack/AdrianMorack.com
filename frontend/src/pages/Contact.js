@@ -1,21 +1,30 @@
+// Contact page component - form for visitors to send messages
+// Submits data to backend API which sends email via Resend
+// Shows success message after submission
+
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 function Contact() {
+  // Hook for translations - switches between English and German
   const { t } = useTranslation();
+  
+  // Form state - tracks user input for name, email, and message
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
-  const [status, setStatus] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState(''); // Status message (sending/success/error)
+  const [submitted, setSubmitted] = useState(false); // Whether form was successfully submitted
 
+  // Handle form submission - sends data to backend API
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus(t('contact.sending'));
+    e.preventDefault(); // Prevent default form submission
+    setStatus(t('contact.sending')); // Show "sending" message
 
     try { 
+      // POST request to backend contact endpoint
       const response = await fetch('https://adrianmorack-com.onrender.com/api/contact', {
         method: 'POST',
         headers: {
@@ -25,17 +34,21 @@ function Contact() {
       });
 
       if (response.ok) {
+        // Success - show success message and reset form
         setStatus(t('contact.success'));
         setSubmitted(true);
         setFormData({ name: '', email: '', message: '' });
       } else {
+        // Error response from server
         setStatus(t('contact.error'));
       }
     } catch (error) {
+      // Network error or other exception
       setStatus(t('contact.error'));
     }
   }
 
+  // Update form state when user types in input fields
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -43,6 +56,7 @@ function Contact() {
     });
   };
 
+  // Reusable style object for all form inputs
   const inputStyle = {
     width: '100%',
     padding: '15px',
@@ -71,8 +85,7 @@ function Contact() {
         color: '#FED766',
         textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
       }}>{t('contact.title')}</h1>
-      
-      {!submitted ? (
+            {/* Conditional rendering - show form or success message */}      {!submitted ? (
         <form 
           onSubmit={handleSubmit} 
           style={{ 
