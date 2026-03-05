@@ -66,13 +66,7 @@ function Projects() {
                     }}>
                         Projects
                     </h1>
-                    <p style={{
-                        color: '#009FB7',
-                        fontSize: isMobile ? '0.95rem' : '1.1rem',
-                        margin: 0,
-                    }}>
-                        Things I've built — from side experiments to real deployments.
-                    </p>
+                    
                     <div style={{
                         marginTop: '20px',
                         height: '2px',
