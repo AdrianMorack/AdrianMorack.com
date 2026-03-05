@@ -12,7 +12,8 @@ const resources = {
       nav: {
         home: "Home",
         skills: "Skills",
-        contact: "Contact"
+        contact: "Contact",
+        projects: "Projects"
       },
       home: {
         welcome: "Welcome to Adrian Morack's Website",

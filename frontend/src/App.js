@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import Home from './pages/Home';
 import Skills from './pages/Skills';
 import Contact from './pages/Contact';
+import Projects from './pages/Projects';
 
 function App() {
   // Hook for translations - provides t() function and i18n instance
@@ -55,6 +56,7 @@ function App() {
             justifyContent: isMobile ? 'flex-start' : 'center',
             flex: isMobile ? '1' : 'unset'
           }}>
+            
           <Link 
             to="/" 
             style={{ 
@@ -79,6 +81,7 @@ function App() {
           >
             {t('nav.home')}
           </Link>
+
           <Link 
             to="/skills" 
             style={{ 
@@ -103,6 +106,32 @@ function App() {
           >
             {t('nav.skills')}
           </Link>
+
+          <Link 
+            to="/projects" 
+            style={{ 
+              margin: isMobile ? '0 2px' : '0 10px', 
+              color: '#FED766', 
+              textDecoration: 'none', 
+              fontSize: isMobile ? '0.85rem' : '1.1rem',
+              fontWeight: '600',
+              padding: isMobile ? '8px 10px' : '10px 20px',
+              borderRadius: '8px',
+              transition: 'all 0.3s ease',
+              background: 'transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(254, 215, 102, 0.15)';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.transform = 'translateY(0)';
+            }}
+          >
+            {t('nav.projects')}
+          </Link>
+
           <Link 
             to="/contact" 
             style={{ 
@@ -169,6 +198,7 @@ function App() {
           <Route path="/" element={<div className="App-header"><Home /></div>} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/contact" element={<div className="App-header"><Contact /></div>} />
+          <Route path="/projects" element={<Projects />} />
         </Routes>
       </div>
     </Router>
