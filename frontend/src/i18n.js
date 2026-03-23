@@ -75,6 +75,22 @@ const resources = {
         sending: "Sending...",
         success: "Message sent successfully!",
         error: "Failed to send message. Please try again."
+      },
+      projects: {
+        source: "Source",
+        liveDemo: "Live Demo",
+        adrianmorack: {
+          date: "December 2025",
+          summary: "My personal portfolio website, the one you're looking at right now. Built with a React frontend and a TypeScript/Express backend. Features English/German localization, a contact form that routes through the backend, and a responsive design optimized for desktop and mobile."
+        },
+        overtakehq: {
+          date: "March 2026",
+          summary: "A full-stack Formula 1 prediction platform where players join Grids, predict race outcomes (qualifying P1–P3, race P1–P3, fastest lap, and top team), and compete on leaderboards. Features JWT authentication with refresh token rotation, live race streaming via Server-Sent Events, and F1 championship standings sourced from the Jolpica API. A FastAPI Python service bridges the FastF1 library for real-time telemetry and timing data, while server-side cron jobs automatically sync the race schedule, score qualifying and race results, and detect live sessions. Fully orchestrated with Docker Compose and automated via GitHub Actions for weekly data syncs, race-weekend keep-alives, and scheduled database backups."
+        },
+        foxhole: {
+          date: "June 2024",
+          summary: "A full-stack live war stats dashboard for the game Foxhole. Pulls real-time war data directly from the official Foxhole API and displays war state, map control percentages, and town hall ownership across both game shards (Able and Baker). Built with Laravel 12, Livewire 3, and Tailwind CSS 4. Features ETag-based API caching to avoid redundant fetches, server-side query caching for snappy UI, and Artisan commands that drive the full data sync pipeline — war state, map reports, live map icons, and location labels."
+        }
       }
     }
   },
@@ -146,6 +162,22 @@ const resources = {
         sending: "Wird gesendet...",
         success: "Nachricht erfolgreich gesendet!",
         error: "Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
+      },
+      projects: {
+        source: "Quellcode",
+        liveDemo: "Live Demo",
+        adrianmorack: {
+          date: "Dezember 2025",
+          summary: "Meine persönliche Portfolio-Website – genau die, die du gerade betrachtest. Entwickelt mit einem React-Frontend und einem TypeScript/Express-Backend. Bietet Englisch/Deutsch-Lokalisierung, ein Kontaktformular, das über das Backend geleitet wird, und ein responsives Design, das für Desktop und Mobile optimiert ist."
+        },
+        overtakehq: {
+          date: "März 2026",
+          summary: "Eine vollwertige Formel-1-Vorhersageplattform, auf der Spieler Grids beitreten, Rennergebnisse vorhersagen (Qualifying P1–P3, Rennen P1–P3, schnellste Runde und Top-Team) und auf Bestenlisten gegeneinander antreten. Bietet JWT-Authentifizierung mit Refresh-Token-Rotation, Live-Renn-Streaming über Server-Sent Events und F1-Meisterschaftsstandings aus der Jolpica API. Ein FastAPI-Python-Dienst verbindet die FastF1-Bibliothek für Echtzeit-Telemetrie- und Timing-Daten, während serverseitige Cron-Jobs den Rennkalender automatisch synchronisieren, Qualifying- und Rennergebnisse bewerten und Live-Sessions erkennen. Vollständig orchestriert mit Docker Compose und automatisiert über GitHub Actions für wöchentliche Datensynchronisierungen, Rennwochenend-Keep-Alives und geplante Datenbank-Backups."
+        },
+        foxhole: {
+          date: "Juni 2024",
+          summary: "Ein vollwertiges Live-Kriegsstatistik-Dashboard für das Spiel Foxhole. Ruft Echtzeit-Kriegsdaten direkt von der offiziellen Foxhole-API ab und zeigt Kriegszustand, Kartenkontrollprozentsätze und Stadthallenbesitz über beide Spielserver (Able und Baker) an. Entwickelt mit Laravel 12, Livewire 3 und Tailwind CSS 4. Bietet ETag-basiertes API-Caching zur Vermeidung redundanter Anfragen, serverseitiges Query-Caching für eine reaktionsschnelle Benutzeroberfläche und Artisan-Befehle, die die vollständige Datensynchronisierungs-Pipeline antreiben – Kriegszustand, Kartenberichte, Live-Kartensymbole und Standortbeschriftungen."
+        }
       }
     }
   }

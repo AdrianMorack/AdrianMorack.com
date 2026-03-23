@@ -1,52 +1,49 @@
 // Project Page - blog-style layout to showcase projects
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
-
-const projects = [
-    {
-        title: 'AdrianMorack.com',
-        date: 'December 2025',
-        tags: ['React', 'Node.js', 'Express', 'TypeScript', 'i18n'],
-        summary:
-            "My personal portfolio website, the one you're looking at right now. Built with a React frontend and a TypeScript/Express backend. Features English/German localization, a contact form that routes through the backend, and a responsive design optimized for desktop and mobile.",
-        github: 'https://github.com/AdrianMorack/AdrianMorack.com',
-        demo: null,
-    },
-
-    {
-        title: 'OvertakeHQ.com',
-        date: 'March 2026',
-        tags: ['React', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Python', 'FastAPI', 'Docker', 'Full Stack'],
-        summary:
-            "A full-stack Formula 1 prediction platform where players join Grids, predict race outcomes (qualifying P1–P3, race P1–P3, fastest lap, and top team), and compete on leaderboards. Features JWT authentication with refresh token rotation, live race streaming via Server-Sent Events, and F1 championship standings sourced from the Jolpica API. A FastAPI Python service bridges the FastF1 library for real-time telemetry and timing data, while server-side cron jobs automatically sync the race schedule, score qualifying and race results, and detect live sessions. Fully orchestrated with Docker Compose and automated via GitHub Actions for weekly data syncs, race-weekend keep-alives, and scheduled database backups.",
-        github: 'https://github.com/AdrianMorack/Overtake.com',
-        demo: 'https://overtakehq.com',
-    },
-
-    {
-        title: 'FoxholeProject',
-        date: 'June 2024',
-        tags: ['PHP', 'Laravel', 'Livewire', 'Tailwind CSS', 'MySQL', 'Full Stack'],
-        summary:
-            "A full-stack live war stats dashboard for the game Foxhole. Pulls real-time war data directly from the official Foxhole API and displays war state, map control percentages, and town hall ownership across both game shards (Able and Baker). Built with Laravel 12, Livewire 3, and Tailwind CSS 4. Features ETag-based API caching to avoid redundant fetches, server-side query caching for snappy UI, and Artisan commands that drive the full data sync pipeline — war state, map reports, live map icons, and location labels.",
-        github: 'https://github.com/AdrianMorack/FoxholeProject-',
-        demo: 'https://foxholeproject-main-7simwz.laravel.cloud/able', 
-    }
-    // Add more projects below following the same structure:
-    // {
-    //   title: 'Project Name',
-    //   date: 'Month Year',
-    //   tags: ['Tech1', 'Tech2'],
-    //   summary: 'Short description of the project.',
-    //   github: 'https://github.com/...',
-    //   demo: 'https://...',
-    // },
-];
+import { useTranslation } from 'react-i18next';
 
 function Projects() {
+    const { t } = useTranslation();
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [hoveredCard, setHoveredCard] = useState(null);
     const [hoveredLink, setHoveredLink] = useState(null);
+
+    const projects = [
+        {
+            title: 'AdrianMorack.com',
+            date: t('projects.adrianmorack.date'),
+            tags: ['React', 'Node.js', 'Express', 'TypeScript', 'i18n'],
+            summary: t('projects.adrianmorack.summary'),
+            github: 'https://github.com/AdrianMorack/AdrianMorack.com',
+            demo: null,
+        },
+        {
+            title: 'OvertakeHQ.com',
+            date: t('projects.overtakehq.date'),
+            tags: ['React', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Python', 'FastAPI', 'Docker', 'Full Stack'],
+            summary: t('projects.overtakehq.summary'),
+            github: 'https://github.com/AdrianMorack/Overtake.com',
+            demo: 'https://overtakehq.com',
+        },
+        {
+            title: 'FoxholeProject',
+            date: t('projects.foxhole.date'),
+            tags: ['PHP', 'Laravel', 'Livewire', 'Tailwind CSS', 'MySQL', 'Full Stack'],
+            summary: t('projects.foxhole.summary'),
+            github: 'https://github.com/AdrianMorack/FoxholeProject-',
+            demo: 'https://foxholeproject-main-7simwz.laravel.cloud/able',
+        },
+        // Add more projects below following the same structure:
+        // {
+        //   title: 'Project Name',
+        //   date: t('projects.myproject.date'),
+        //   tags: ['Tech1', 'Tech2'],
+        //   summary: t('projects.myproject.summary'),
+        //   github: 'https://github.com/...',
+        //   demo: 'https://...',
+        // },
+    ];
 
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -74,7 +71,7 @@ function Projects() {
                         textShadow: '2px 2px 8px rgba(0,0,0,0.4)',
                         lineHeight: '1.2',
                     }}>
-                        Projects
+                        {t('nav.projects')}
                     </h1>
                     
                     <div style={{
@@ -185,7 +182,7 @@ function Projects() {
                                         }}
                                     >
                                         <FaGithub size={15} />
-                                        Source
+                                        {t('projects.source')}
                                     </a>
                                 )}
                                 {project.demo && (
@@ -212,7 +209,7 @@ function Projects() {
                                         }}
                                     >
                                         <FaExternalLinkAlt size={13} />
-                                        Live Demo
+                                        {t('projects.liveDemo')}
                                     </a>
                                 )}
                             </div>
