@@ -83,7 +83,8 @@ const resources = {
       nav: {
         home: "Startseite",
         skills: "Fähigkeiten",
-        contact: "Kontakt"
+        contact: "Kontakt",
+        projects: "Projekte"
       },
       home: {
         welcome: "Willkommen auf Adrian Morack's Website",
